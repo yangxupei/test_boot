@@ -1,0 +1,33 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.yangxupei.springboot.mybatis.config.datasource.DatasourceConfig",
+      "name": "app.datasource.check",
+      "sourceMethod": "reserveDatasource()",
+      "type": "javax.sql.DataSource"
+    },
+    {
+      "sourceType": "com.yangxupei.springboot.mybatis.config.datasource.DatasourcePropertiesConfig",
+      "name": "app.datasource.reserve",
+      "type": "com.yangxupei.springboot.mybatis.config.datasource.DatasourcePropertiesConfig"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.yangxupei.springboot.mybatis.config.datasource.DatasourcePropertiesConfig",
+      "name": "app.datasource.reserve.password",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.yangxupei.springboot.mybatis.config.datasource.DatasourcePropertiesConfig",
+      "name": "app.datasource.reserve.url",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.yangxupei.springboot.mybatis.config.datasource.DatasourcePropertiesConfig",
+      "name": "app.datasource.reserve.username",
+      "type": "java.lang.String"
+    }
+  ]
+}

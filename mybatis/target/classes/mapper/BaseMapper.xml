@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="BaseMapper">
+    <resultMap id="BaseResultMap" type="com.yangxupei.springboot.mybatis.model.BaseModelPo">
+        <result column="ROW_COUNT" property="rowCount" jdbcType="VARCHAR"/>
+        <result column="All_AMT" property="allAmt" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <resultMap id="BasePoResultMap" type="com.yangxupei.springboot.mybatis.model.BaseModelPo">
+        <result column="ROW_COUNT" property="rowCount" jdbcType="VARCHAR"/>
+        <result column="All_AMT" property="allAmt" jdbcType="VARCHAR"/>
+        <result column="ID" property="id" jdbcType="INTEGER"/>
+        <result column="REMARK_DESC" property="remarkDesc" jdbcType="VARCHAR"/>
+        <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR"/>
+        <result column="CREATE_AT" property="createAt" jdbcType="TIMESTAMP"/>
+        <result column="UPDATE_BY" property="updateBy" jdbcType="VARCHAR"/>
+        <result column="UPDATE_AT" property="updateAt" jdbcType="TIMESTAMP"/>
+        <result column="DELETE_FLAG"        property="deleteFlag"       jdbcType="VARCHAR" />
+    </resultMap>
+
+
+    <sql id="BaseColumns">
+        ,ID,REMARK_DESC,CREATE_BY,CREATE_AT,UPDATE_BY,UPDATE_AT
+    </sql>
+
+    <sql id="BaseColumnsNoId">
+        ,REMARK_DESC,CREATE_BY,CREATE_AT,UPDATE_BY,UPDATE_AT
+    </sql>
+
+    <sql id="BaseColumnsNoIdForSelect">
+        ,T.REMARK_DESC,T.CREATE_BY,T.CREATE_AT,T.UPDATE_BY,T.UPDATE_AT
+    </sql>
+
+    <sql id="BaseColumnsForJava">
+        ,#{remarkDesc},#{createBy},CURRENT_TIMESTAMP,#{updateBy},CURRENT_TIMESTAMP
+    </sql>
+
+    <sql id="BaseColumnsForJavaList">
+        ,#{item.remarkDesc},#{item.createBy},CURRENT_TIMESTAMP,#{item.updateBy},CURRENT_TIMESTAMP
+    </sql>
+
+    <sql id="bankAccDb">
+        ,ACCOUNT,ACCT_NAME,OPEN_BANK_NAME
+    </sql>
+    <sql id="reportBaseDb">
+        ,ORG_NO,REPORT_DATE,FILL_DATE,FILL_PERSON,CHECK_PERSON,BASE_DATE_BATCH_NO,TRADE_DATE,REPORT_BATCH_NO,DELETE_FLAG,BASE_DATA_ID,SUBMIT_MSG_ID
+    </sql>
+    <sql id="reportBaseJava">
+        ,#{orgNo},#{reportDate},#{fillDate},#{fillPerson},#{checkPerson},#{baseDateBatchNo},#{tradeDate},#{reportBatchNo},#{deleteFlag},#{baseDateId},#{submitMsgId}
+    </sql>
+    <sql id="reportBaseJavaList">
+        ,#{item.orgNo},#{item.reportDate},#{item.fillDate},#{item.fillPerson},#{item.checkPerson},#{item.baseDateBatchNo}
+            ,#{item.tradeDate},#{item.deleteFlag},#{item.baseDateId},#{item.submitMsgId}
+    </sql>
+
+
+
+    <sql id="bankAcc">
+        ,#{account},#{acctName},#{openBankName}
+    </sql>
+    <sql id="bankAccList">
+        ,#{item.account},#{item.acctName},#{item.openBankName}
+    </sql>
+
+    <sql id="pageHead">
+        SELECT SUB.*,@ROW_COUNT AS ROW_COUNT FROM (
+        SELECT
+        RES.*,(@ROW_COUNT := @ROW_COUNT +1)
+        FROM (select @ROW_COUNT :=0) as it,(
+    </sql>
+
+    <sql id="pageHeadAmt">
+        SELECT SUB.*,@ROW_COUNT AS ROW_COUNT,@_AMT AS ALL_AMT FROM (
+        SELECT
+        RES.*,(@ROW_COUNT := @ROW_COUNT +1),(@_AMT := @_AMT + AMT_)
+        FROM (select @ROW_COUNT :=0) as it,(select @_AMT := 0) as TI,(
+    </sql>
+
+    <sql id="pageFoot">
+        ) RES ) SUB
+        limit #{startRow},#{pageSize}
+    </sql>
+    <sql id="BaseColumnsForJavaMore">
+        ,#{item.remarkDesc},#{item.createBy},CURRENT_TIMESTAMP,#{item.updateBy},CURRENT_TIMESTAMP
+    </sql>
+
+    <sql id="pageFootMore">
+        ) RES ) SUB
+        limit #{item.startRow},#{item.pageSize}
+    </sql>
+</mapper>

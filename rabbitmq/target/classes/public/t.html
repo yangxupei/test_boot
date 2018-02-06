@@ -1,0 +1,23 @@
+<html>
+<head>
+	<style type="text/css">
+		.nc{
+			width: 500px;
+			height: 400px;
+			border: solid 1px red; 
+		}
+	</style>
+
+</head>
+<body>
+<div id="par"></div>
+</body>
+<script>
+var parent = document.getElementById("par");
+var div = document.createElement("div");
+div.setAttribute("id", "newDiv");
+div.setAttribute("class", "nc");
+div.innerHTML = "js div";
+parent.appendChild(div);
+</script>
+</html>

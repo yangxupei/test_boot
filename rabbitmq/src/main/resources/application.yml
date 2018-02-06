@@ -1,0 +1,26 @@
+server:
+  port: 8030
+
+#spring:
+#  rabbitmq:
+#    host: 192.168.200.51
+#    port: 5672
+#    username: oriental
+#    password: oriental
+#    virtual-host: y_test
+
+
+
+app:
+  rabbitmq:
+    yangxupei:
+      exchange: e_yangxupei
+      routing_key: r_yangxupei
+      queues: q_yangxupei
+      host: 192.168.200.51
+      port: 5672
+      username: oriental
+      password: oriental
+      virtual-host: y_test
+
+

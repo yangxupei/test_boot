@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yangxupei.springboot.mybatis.mapper.AccountOrgCodeMapper" >
+    <resultMap id="AccountOrgCodeMap" type="com.yangxupei.springboot.mybatis.model.AccountOrgCodePo" extends="BaseMapper.BasePoResultMap">
+        <result column="ACCOUNT_NO"             property="accountNo"        jdbcType="VARCHAR"/>
+        <result column="ORG_CODE"               property="orgCode"        jdbcType="VARCHAR"/>
+        <result column="ORG_TYPE"               property="orgType"          jdbcType="VARCHAR"/>
+        <result column="OTHER_ACCOUNT_NO"       property="otherAccountNo"       jdbcType="VARCHAR"/>
+        <result column="CLEAR_TYPE"             property="clearType"   jdbcType="VARCHAR"/>
+        <result column="SETTLE_TITLE"           property="settleTitle"   jdbcType="VARCHAR"/>
+        <result column="PAY_FOR_ANOTHER"           property="payForAnother"   jdbcType="VARCHAR"/>
+        <result column="FINANCIAL_ORG_CODE"           property="financialOrgCode"   jdbcType="VARCHAR"/>
+        <result column="EXT_TRANS_TYPE"           property="extTransType"   jdbcType="VARCHAR"/>
+        <result column="EPCC"           property="epcc"   jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="columns">
+        ACCOUNT_NO,ORG_CODE,ORG_TYPE,OTHER_ACCOUNT_NO,CLEAR_TYPE,SETTLE_TITLE,DELETE_FLAG,PAY_FOR_ANOTHER,FINANCIAL_ORG_CODE,EXT_TRANS_TYPE
+        ,EPCC
+    </sql>
+
+    <insert id="create">
+        INSERT INTO T_ACCOUNT_ORG_CODE (<include refid="columns"/><include refid="BaseMapper.BaseColumnsNoId"/> ) VALUES
+        (#{accountNo},#{orgCode},#{orgType},#{otherAccountNo},#{clearType},#{settleTitle},#{deleteFlag},#{payForAnother},#{financialOrgCode}
+          ,#{extTransType},#{epcc}<include refid="BaseMapper.BaseColumnsForJava"/>)
+    </insert>
+
+    <select id="selectByModel" resultMap="AccountOrgCodeMap">
+        SELECT <include refid="columns"/><include refid="BaseMapper.BaseColumns"/> FROM T_ACCOUNT_ORG_CODE T WHERE 1=1
+        <if test="null != accountNo and accountNo != ''">
+            AND T.ACCOUNT_NO = #{accountNo}
+        </if>
+        <if test="null != orgCode and orgCode != ''">
+            AND T.ORG_CODE = #{orgCode}
+        </if>
+        <if test="null != orgType and orgType != ''">
+            AND T.ORG_TYPE = #{orgType}
+        </if>
+        <if test="null != otherAccountNo and otherAccountNo != ''">
+            AND T.OTHER_ACCOUNT_NO = #{otherAccountNo}
+        </if>
+        <if test="null != clearType and clearType != ''">
+            AND T.CLEAR_TYPE = #{clearType}
+        </if>
+        <if test="null != settleTitle and settleTitle != ''">
+            AND T.SETTLE_TITLE = #{settleTitle}
+        </if>
+        AND T.DELETE_FLAG = #{deleteFlag}
+    </select>
+
+    <select id="selectByModelPage" resultMap="AccountOrgCodeMap">
+        <include refid="BaseMapper.pageHead"/>
+        SELECT <include refid="columns"/><include refid="BaseMapper.BaseColumns"/> FROM T_ACCOUNT_ORG_CODE T WHERE 1=1
+        <if test="null != accountNo and accountNo != ''">
+            AND T.ACCOUNT_NO = #{accountNo}
+        </if>
+        <if test="null != orgCode and orgCode != ''">
+            AND T.ORG_CODE = #{orgCode}
+        </if>
+        <if test="null != orgType and orgType != ''">
+            AND T.ORG_TYPE = #{orgType}
+        </if>
+        <if test="null != otherAccountNo and otherAccountNo != ''">
+            AND T.OTHER_ACCOUNT_NO = #{otherAccountNo}
+        </if>
+        <if test="null != clearType and clearType != ''">
+            AND T.CLEAR_TYPE = #{clearType}
+        </if>
+        <if test="null != settleTitle and settleTitle != ''">
+            AND T.SETTLE_TITLE = #{settleTitle}
+        </if>
+        AND T.DELETE_FLAG = #{deleteFlag}
+        ORDER BY T.CREATE_AT DESC
+        <include refid="BaseMapper.pageFoot"/>
+    </select>
+
+    <update id="update">
+        UPDATE T_ACCOUNT_ORG_CODE T SET
+        <if test="null != accountNo">
+            T.ACCOUNT_NO = #{accountNo},
+        </if>
+        <if test="null != orgCode">
+            T.ORG_CODE = #{orgCode},
+        </if>
+        <if test="null != orgType">
+            T.ORG_TYPE = #{orgType},
+        </if>
+        <if test="null != otherAccountNo">
+            T.OTHER_ACCOUNT_NO = #{otherAccountNo},
+        </if>
+        <if test="null != clearType">
+            T.CLEAR_TYPE = #{clearType},
+        </if>
+        <if test="null != settleTitle">
+            T.SETTLE_TITLE = #{settleTitle},
+        </if>
+        <if test="null != payForAnother">
+            T.PAY_FOR_ANOTHER = #{payForAnother},
+        </if>
+        <if test="null != deleteFlag">
+            T.DELETE_FLAG = #{deleteFlag},
+        </if>
+        <if test="null != remarkDesc">
+            T.REMARK_DESC = #{remarkDesc},
+        </if>
+        <if test="null != financialOrgCode">
+            T.FINANCIAL_ORG_CODE = #{financialOrgCode},
+        </if>
+        <if test="null != extTransType">
+            T.EXT_TRANS_TYPE = #{extTransType},
+        </if>
+        <if test="null != epcc">
+            T.EPCC = #{epcc},
+        </if>
+        T.UPDATE_BY = #{updateBy},
+        T.UPDATE_AT = CURRENT_TIMESTAMP
+        WHERE T.ID = #{id}
+    </update>
+
+
+</mapper>

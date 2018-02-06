@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yangxupei.boot.security.db.mapper.UserMapper" >
+    <resultMap id="userMap" type="com.yangxupei.boot.security.db.model.User">
+        <result column="id"             property="id"        jdbcType="VARCHAR"/>
+        <result column="username"             property="username"        jdbcType="VARCHAR"/>
+        <result column="password"             property="password"        jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="columns">
+        id,username,password
+    </sql>
+
+    <select id="findByUsername" resultMap="userMap">
+        SELECT <include refid="columns"/> FROM t_user T WHERE t.username=#{username}
+    </select>
+
+
+
+</mapper>

@@ -1,0 +1,12 @@
+server:
+  port: 8030
+
+
+
+app:
+  datasource:
+    check:
+      url: 1
+      username: root
+      password: d
+      driverClassName: mysql
